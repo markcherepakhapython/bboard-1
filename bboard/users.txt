@@ -1,5 +1,2 @@
-loging:kit2
-password: kit212345
-
-loging:kit3
-password: kit312345
+login: kit
+password: kit
