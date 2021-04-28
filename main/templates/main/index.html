@@ -1,7 +1,58 @@
 {% extends "layout/basic.html" %}
 
+{% load bootstrap4 %}
+{% load static %}
+{% load thumbnail %}
+
 {% block content %}
 
-<h2>Последние 10 объявлений</h2>
+
+
+<div class="container-fluid mb-2">
+    <div class="row">
+        <h2 class="col">
+            {% if keyword %}
+            Результат поиска
+            {% else %}
+            Последние 10 объявлений
+            {% endif %}
+        </h2>
+        <form class="col-md-auto form-inline">
+            {% bootstrap_form form show_label=False %}
+            {% bootstrap_button content='Поиск' button_type='submit' %}
+        </form>
+    </div>
+</div>
+
+{% if bbs %}
+<ul class="list-unstyled">
+    {% for bb in bbs %}
+    <li class="media my-5 p-3 border">
+        {% url 'main:detail' rubric_pk=bb.rubric.pk pk=bb.pk as url %}
+        <a href="{{ url }}{{ all }}">
+            {% if bb.image %}
+            <img class="mr-3" src="{% thumbnail bb.image 'default' %}">
+            {% else %}
+            <img class="mr-3" src="{% static 'main/empty.jpg' %}">
+            {% endif %}
+        </a>
+        <div class="media-body">
+            <h3>
+                <a href="{{ url }}{{ all }}">
+                    {{ bb.title }}
+                </a>
+            </h3>
+            <div>{{ bb.content }}</div>
+            <p class="text-write font-weight-bold">
+                {{ bb.price }} грн.
+            </p>
+            <p class="text-write font-italic">
+                {{ bb.created_at }}
+            </p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock content %}

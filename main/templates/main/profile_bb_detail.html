@@ -2,7 +2,7 @@
 
 
 {% block title %}
-{{ bb.title }} - {{ bb.rubric.name }}
+{{ bb.title }} (Автор: {{ bb.author }})
 {% endblock %}
 
 {% block content %}
@@ -32,7 +32,7 @@
 </div>
 {% endif %}
 <p>
-    <a href="{% url 'main:by_rubric' pk=bb.rubric.pk %}{{ all }}">Открыть рубрику</a>
+    <a href="{% url 'main:profile' %}">Назад в профиль</a>
 </p>
 
 {% endblock %}
