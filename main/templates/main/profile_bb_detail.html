@@ -1,6 +1,6 @@
 {% extends "layout/basic.html" %}
 
-
+{% load bootstrap4 %}
 {% block title %}
 {{ bb.title }} (Автор: {{ bb.author }})
 {% endblock %}
@@ -27,6 +27,19 @@
     {% for ai in ais %}
     <div>
         <img class="additional-image" src="{{ ai.image.url }}">
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% if comments %}
+<div class="mt-5">
+    {% for comment in comments %}
+    <div class='my-2 p-2 border'>
+        <h5>
+            {{ comment.author }}
+        </h5>
+        <p>{{ comment.content }}</p>
+        <p class="text-right font-italic">{{ comment.created_at }}</p>
     </div>
     {% endfor %}
 </div>
